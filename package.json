@@ -1,0 +1,50 @@
+{
+  "name": "messy-hooks",
+  "version": "0.0.2",
+  "description": "some (personal think) useful react hooks",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XHMM/react-hooks.git"
+  },
+  "scripts": {
+    "prepublish": "tsc",
+    "dev": "parcel ./examples/index.html",
+    "build-doc": "parcel build ./examples/index.html -d docs --no-source-maps --public-url /messy-hooks/"
+  },
+  "files": [
+    "build",
+    "LISCENSE"
+  ],
+  "keywords": [
+    "react",
+    "react hooks"
+  ],
+  "author": "xhmm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/XHMM/react-hooks/issues"
+  },
+  "homepage": "https://github.com/XHMM/react-hooks#readme",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.136",
+    "@types/react": "^16.9.1",
+    "@types/react-dom": "^16.8.5",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^6.1.0",
+    "eslint-config-xhmm": "0.0.17",
+    "parcel": "^1.12.3",
+    "parcel-plugin-clean-dist": "0.0.6",
+    "prettier": "^1.18.2",
+    "prettier-config-xhmm": "0.0.5"
+  }
+}
