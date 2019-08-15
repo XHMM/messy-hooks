@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, RefObject } from 'react';
-// @ts-ignore
 import ResizeObserver from 'resize-observer-polyfill';
 import { throttle } from 'lodash';
 

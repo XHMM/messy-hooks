@@ -1,8 +1,6 @@
 <h1  align="center">💥messy-hooks💥</h1>
 <div  align="center">Contains (many) different react hooks (so it's called *messy* hooks)</div>
 
-
-
 ## Demo
 
 [live demo](https://xhmm.github.io/messy-hooks/) (site looks ugly😅)
@@ -19,7 +17,20 @@ below introductions are not very detail and ready-to-use, but you can check [exa
 
 ### useRequest
 
-fetch data with hooks, **only support json response**.
+use fetch api, **only support json response**.
+
+```js
+const { makeRequest, requestInfo } = useRequest(url, options);
+```
+
+| name        | desc                                                       |
+| ----------- | ---------------------------------------------------------- |
+| url         | same as `fetch` first parameter                            |
+| options     | same as `fetch` second parameter but without `body` option |
+| makeRequest | `(body)=>void`   pass in `body` and make request call      |
+| requestInfo | `{ loading, error, errorEntity, data, status }`            |
+
+#### example
 
 ```js
 import { useRequest, UseRequestStatus } from 'messy-hooks';
@@ -48,6 +59,8 @@ if(status === UseRequestStatus.FetchSuccess) {}
 
 get elapsed time, second as unit.
 
+#### example
+
 ```js
 import { useTimer } from 'messy-hooks';
 
@@ -60,6 +73,16 @@ const { rawSeconds, hours, minutes, seconds } = timerData;
 ------
 
 ### useCanvas
+
+```js
+const canvasRef = useCanvas(draw)
+```
+
+| name | desc                                                         |
+| ---- | ------------------------------------------------------------ |
+| draw | `(context)=>void`  draw anything in this function. You should wrap it within `useCallback` |
+
+#### example
 
 ```js
 import { useCanvas } from 'messy-hooks';
@@ -76,6 +99,8 @@ const canvasRef = useCanvas((ctx) => {
 ### useSize
 
 get element size and position info
+
+#### example
 
 ```js
 import { useSize } from 'messy-hooks';

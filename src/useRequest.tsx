@@ -15,7 +15,7 @@ const initialState: IState<null> = {
 };
 
 function useRequest<D = any>(
-  url: string,
+  url: RequestInfo,
   options: Omit<RequestInit, 'body'> = { method: 'GET' }
 ): { requestInfo: IState<D>; makeRequest: (body?: RequestInit['body']) => void } {
   const [state, dispatch] = useReducer(createReducer<D>(), initialState);
