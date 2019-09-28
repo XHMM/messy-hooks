@@ -15,7 +15,7 @@
 
 ## APIs
 
-**below examples are not very detail and ready-to-use, checkout [examples folder](https://github.com/XHMM/messy-hooks/tree/master/examples) for practical usages.**
+**Below examples are not in detailed and ready-to-use, checkout [examples folder](https://github.com/XHMM/messy-hooks/tree/master/examples) for practical usages.**
 
 
 
@@ -29,10 +29,10 @@ const { makeRequest, requestInfo } = useRequest(url, options);
 
 | name        | desc                                                         |
 | ----------- | ------------------------------------------------------------ |
-| url         | same as `fetch` first parameter                              |
-| options     | same as `fetch` second parameter but without `body` option   |
-| makeRequest | a function: `(body)=>void` ,  pass in `body` and make request call |
-| requestInfo | an object:`{ loading, error, errorEntity, data, status }`    |
+| url         | should be same as `fetch` first parameter                    |
+| options     | should be same as `fetch` second parameter but without `body` option |
+| makeRequest | a function:  `(body)=>void`  to make a request call          |
+| requestInfo | an object: `{ loading, error, errorEntity, data, status }`   |
 
 #### example
 
@@ -49,13 +49,24 @@ function Cmp() {
     });
     
     // pass body to `makeRequest`
-    makeRequest({
+    makeRequest(JSON.stringify({
         name: 'leo'
     });
     
     if(loading) {}
     if(error) { console.err(errorEntity); }
+    
+    /*
+    enum UseRequestStatus {
+  		'Idle' = 'Idle', // initial status
+  		'Fetching' = 'Fetching',
+  		'FetchSuccess' = 'FetchSuccess',
+  		'FetchError' = 'FetchError'
+    }
+    */
     if(status === UseRequestStatus.FetchSuccess) {}
+    
+    return <div>{JSON.stringify(data)}</div>
 }
 ```
 
@@ -71,7 +82,7 @@ const { timerData, startTimer, stopTimer, resetTimer } = useTimer();
 
 | name       | desc                                                         |
 | ---------- | ------------------------------------------------------------ |
-| timerData  | an object contains timer data, see below`example`            |
+| timerData  | an object contains timer data, see below example             |
 | startTimer | a function, call to start timer                              |
 | stopTimer  | a function, call to stop timer                               |
 | resetTimer | a function, call to reset `timerData` but not change timer status(running or stopped) |
@@ -86,6 +97,8 @@ function Cmp() {
 
 	// hours*3600 + minuts*60 + seconds = rawSeconds
 	const { rawSeconds, hours, minutes, seconds } = timerData;
+    
+    return <div>{JSON.stringify(timerData)}</div>
 }
 ```
 
@@ -99,7 +112,7 @@ const canvasRef = useCanvas(draw)
 
 | name | desc                                                         |
 | ---- | ------------------------------------------------------------ |
-| draw | `(context)=>void`  draw anything in this function. You should wrap it within `useCallback` |
+| draw | should be a function: `(context)=>void` . it should be wrapped within `useCallback` depend on your usage. |
 
 #### example
 
@@ -122,17 +135,24 @@ function Cmp() {
 get element size and position info
 
 ```js
-const { x, y, width, height, top, right, bottom, left } = useSize(elementRef);		
+const size = useSize(elementRef);		
 ```
 
 | name       | description                                                  |
 | ---------- | ------------------------------------------------------------ |
-| elementRef | an object returned by `useRef`  and `current` value should be an dom element |
+| elementRef | should be an object returned by `useRef`  and `elementRef.current`  should reference to a dom element. |
+| size       | `size` is `null`  when `elementRef.current` not  referenced to dom(normally occured in first render) , or it will be an object contains element size and position info:  `{ x, y, width, height, top, right, bottom, left }` |
 
 #### example
 
 ```js
+import { useRef } from 'react';
 import { useSize } from 'messy-hooks';
 
-const { x, y, width, height, top, right, bottom, left } = useSize(elementRef);
+function Cmp() {
+    const ref = useRef();
+    const size = useSize(ref);
+    console.log(size); // logged twice: first is null and second is an actual object
+    return <div ref={ref}> Hi </div>
+}
 ```
