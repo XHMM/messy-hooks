@@ -4,12 +4,17 @@ import useSize from '../src/useSize';
 import Layout from './components/Layout';
 
 const Index: FunctionComponent<IProps> = ({}) => {
-  const ref = useRef(document.documentElement);
+  const ref = useRef();
   const size = useSize(ref);
+  console.log(size); // logged null when first render
   return (
     <Layout title={'useSize'}>
-      <div>current window size:</div>
-      <div style={{ whiteSpace: 'pre' }}>{JSON.stringify(size, null, 2)}</div>
+      <div style={{ width: '100%', border: '1px solid skyblue', whiteSpace: 'pre' }} ref={ref}>
+        change window size to see changes:
+        <br />
+        <br />
+        {JSON.stringify(size, null, 2)}
+      </div>
     </Layout>
   );
 };
