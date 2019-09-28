@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, RefObject } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
-import { throttle } from 'lodash';
+import throttle from 'lodash.throttle';
 
 function useSize(targetElementRef: RefObject<HTMLElement>): Omit<DOMRectReadOnly, 'toJSON'> {
   if (!targetElementRef) {
