@@ -6,7 +6,7 @@ import Layout from './components/Layout';
 const Index: FunctionComponent<IProps> = ({}) => {
   const ref = useRef();
   const size = useSize(ref);
-  console.log(size); // logged null when first render
+  console.log(size);
   return (
     <Layout title={'useSize'}>
       <div style={{ width: '100%', border: '1px solid skyblue', whiteSpace: 'pre' }} ref={ref}>

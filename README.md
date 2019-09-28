@@ -1,7 +1,3 @@
-```
-
-```
-
 <h1  align="center">💥messy-hooks💥</h1>
 <div  align="center">Contains (many) different react hooks (so it's called *messy* hooks)</div>
 
@@ -21,7 +17,7 @@
 
 ### useRequest
 
-using `fetch` for request, **only support json response**.
+Use `fetch` for request, **only support json response**.
 
 ```js
 const { makeRequest, requestInfo } = useRequest(url, options);
@@ -74,7 +70,7 @@ function Cmp() {
 
 ### useTimer
 
-get elapsed time, second as unit.
+Get elapsed time, second as unit. **Warning: it's not very accurate because it use `setInterval`**
 
 ```js
 const { timerData, startTimer, stopTimer, resetTimer } = useTimer();
@@ -132,7 +128,7 @@ function Cmp() {
 
 ### useSize
 
-get element size and position info. (polyfill included)
+Get element size and position info. (polyfill included).
 
 ```js
 const size = useSize(elementRef);		
@@ -140,8 +136,8 @@ const size = useSize(elementRef);
 
 | name       | description                                                  |
 | ---------- | ------------------------------------------------------------ |
-| elementRef | should be an object returned by `useRef`  and `elementRef.current`  should reference to a dom element. |
-| size       | `size` is `null`  when `elementRef.current` not  referenced to dom(normally occured in first render) , or it will be an object contains element size and position info:  `{ x, y, width, height, top, right, bottom, left }` |
+| elementRef | should be an object returned by `React.useRef` , also , `elementRef.current`  should reference to a dom element. |
+| size       | an object containing element size and position info:  `{ x, y, width, height, top, right, bottom, left }`, all these properties will 0 when first render. |
 
 #### example
 
@@ -152,7 +148,7 @@ import { useSize } from 'messy-hooks';
 function Cmp() {
     const ref = useRef();
     const size = useSize(ref);
-    console.log(size); // logged twice: first is null and second is an actual object
+    console.log(size); // will logg twice: first is all zero and second has actual value
     return <div ref={ref}> Hi </div>
 }
 ```

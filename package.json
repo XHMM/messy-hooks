@@ -1,6 +1,6 @@
 {
   "name": "messy-hooks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "some (personal think) useful react hooks",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

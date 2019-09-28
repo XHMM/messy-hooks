@@ -7,7 +7,16 @@ function useSize(targetElementRef: RefObject<HTMLElement>): Omit<DOMRectReadOnly
     throw new Error('useSize error: require an ref object as parameter.');
   }
   const observerRef = useRef<ResizeObserver>();
-  const [size, setSize] = useState<Omit<DOMRectReadOnly, 'toJSON'>>(null);
+  const [size, setSize] = useState<Omit<DOMRectReadOnly, 'toJSON'>>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0
+  });
   useEffect(() => {
     try {
       observerRef.current = new ResizeObserver(
