@@ -4,29 +4,34 @@ import { throttle } from 'lodash';
 
 function useSize(targetElementRef: RefObject<HTMLElement>): Omit<DOMRectReadOnly, 'toJSON'> {
   if (!targetElementRef) {
-    throw new Error('useSize requires an element ref');
+    throw new Error('useSize error: require an ref object as parameter.');
   }
   const observerRef = useRef<ResizeObserver>();
   const [size, setSize] = useState<Omit<DOMRectReadOnly, 'toJSON'>>(null);
   useEffect(() => {
-    observerRef.current = new ResizeObserver(
-      throttle(
-        entries => {
-          for (const entry of entries) {
-            setSize(entry.contentRect);
+    try {
+      observerRef.current = new ResizeObserver(
+        throttle(
+          entries => {
+            for (const entry of entries) {
+              setSize(entry.contentRect);
+            }
+          },
+          300,
+          {
+            leading: false
           }
-        },
-        300,
-        {
-          leading: false
-        }
-      )
-    );
-    observerRef.current.observe(targetElementRef.current);
-    return () => {
-      observerRef.current.disconnect();
-    };
+        )
+      );
+      observerRef.current.observe(targetElementRef.current);
+      return () => {
+        observerRef.current.disconnect();
+      };
+    } catch (e) {
+      console.error(`useSize error: ${e.message}`);
+    }
   }, [targetElementRef]);
   return size;
 }
+
 export default useSize;
