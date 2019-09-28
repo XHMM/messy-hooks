@@ -132,7 +132,7 @@ function Cmp() {
 
 ### useSize
 
-get element size and position info
+get element size and position info. (polyfill included)
 
 ```js
 const size = useSize(elementRef);		
