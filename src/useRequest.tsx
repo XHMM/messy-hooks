@@ -31,11 +31,11 @@ function useRequest<D = any>(
             const json = await response.json();
             dispatch({ type: UseRequestStatus.FetchSuccess, data: json });
           } catch (e) {
+            console.error(e);
             dispatch({
               type: UseRequestStatus.FetchError,
               errorEntity: new Error('useRequest only works with json response now')
             });
-            console.error(e);
           }
         } else {
           console.error(response);

@@ -1,3 +1,7 @@
+```
+
+```
+
 <h1  align="center">💥messy-hooks💥</h1>
 <div  align="center">Contains (many) different react hooks (so it's called *messy* hooks)</div>
 
@@ -9,48 +13,50 @@
 
 `npm i messy-hooks`
 
-## Usage
+## APIs
 
-below introductions are not very detail and ready-to-use, but you can check [examples folder](https://github.com/XHMM/messy-hooks/tree/master/examples) for practical usage.
+**below examples are not very detail and ready-to-use, checkout [examples folder](https://github.com/XHMM/messy-hooks/tree/master/examples) for practical usages.**
 
 
 
 ### useRequest
 
-use fetch api, **only support json response**.
+using `fetch` for request, **only support json response**.
 
 ```js
 const { makeRequest, requestInfo } = useRequest(url, options);
 ```
 
-| name        | desc                                                       |
-| ----------- | ---------------------------------------------------------- |
-| url         | same as `fetch` first parameter                            |
-| options     | same as `fetch` second parameter but without `body` option |
-| makeRequest | `(body)=>void`   pass in `body` and make request call      |
-| requestInfo | `{ loading, error, errorEntity, data, status }`            |
+| name        | desc                                                         |
+| ----------- | ------------------------------------------------------------ |
+| url         | same as `fetch` first parameter                              |
+| options     | same as `fetch` second parameter but without `body` option   |
+| makeRequest | a function: `(body)=>void` ,  pass in `body` and make request call |
+| requestInfo | an object:`{ loading, error, errorEntity, data, status }`    |
 
 #### example
 
 ```js
 import { useRequest, UseRequestStatus } from 'messy-hooks';
 
-// 'error' is boolean,
-// 'errorEntity' is the actual error object,
-// 'status' is a helper enum property for you to identity request loading/error/success, get more in src/useRequest.tsx
-const { makeRequest, requestInfo: {loading, error, errorEntity, data, status} } = useRequest("http://xxx.com", {
-    method: 'POST',
-    // don't pass `body` here
-});
-
-// pass body to `makeRequest`
-makeRequest({
-    name: 'leo'
-});
-
-if(loading) {}
-if(error) { console.err(errorEntity); }
-if(status === UseRequestStatus.FetchSuccess) {}
+function Cmp() {
+    // 'error' is boolean,
+    // 'errorEntity' is the actual error object,
+    // 'status' is a helper enum property for you to identity request status.
+    const { makeRequest, requestInfo: {loading, error, errorEntity, data, status} } = useRequest("http://xxx.com", {
+        method: 'POST',
+        // don't pass `body` here
+    });
+    
+    // pass body to `makeRequest`
+    makeRequest({
+        name: 'leo'
+    });
+    
+    if(loading) {}
+    if(error) { console.err(errorEntity); }
+    if(status === UseRequestStatus.FetchSuccess) {}
+}
 ```
 
 ------
@@ -59,15 +65,28 @@ if(status === UseRequestStatus.FetchSuccess) {}
 
 get elapsed time, second as unit.
 
+```js
+const { timerData, startTimer, stopTimer, resetTimer } = useTimer();
+```
+
+| name       | desc                                                         |
+| ---------- | ------------------------------------------------------------ |
+| timerData  | an object contains timer data, see below`example`            |
+| startTimer | a function, call to start timer                              |
+| stopTimer  | a function, call to stop timer                               |
+| resetTimer | a function, call to reset `timerData` but not change timer status(running or stopped) |
+
 #### example
 
 ```js
 import { useTimer } from 'messy-hooks';
 
-const { timerData, startTimer, stopTimer, resetTimer } = useTimer();
+function Cmp() {
+    const { timerData, startTimer, stopTimer, resetTimer } = useTimer();
 
-// hours*3600 + minuts*60 + seconds = rawSeconds
-const { rawSeconds, hours, minutes, seconds } = timerData;
+	// hours*3600 + minuts*60 + seconds = rawSeconds
+	const { rawSeconds, hours, minutes, seconds } = timerData;
+}
 ```
 
 ------
@@ -87,11 +106,13 @@ const canvasRef = useCanvas(draw)
 ```js
 import { useCanvas } from 'messy-hooks';
 
-const canvasRef = useCanvas((ctx) => {
+function Cmp() {
+    const canvasRef = useCanvas((ctx) => {
     // draw here
-});
+	});
 
-<canvas ref={canvasRef} />
+	return <canvas ref={canvasRef} />
+}
 ```
 
 ------
@@ -100,11 +121,18 @@ const canvasRef = useCanvas((ctx) => {
 
 get element size and position info
 
+```js
+const { x, y, width, height, top, right, bottom, left } = useSize(elementRef);		
+```
+
+| name       | description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| elementRef | an object returned by `useRef`  and `current` value should be an dom element |
+
 #### example
 
 ```js
 import { useSize } from 'messy-hooks';
 
-const { x, y, width, height, top, right, bottom, left } = useSize(document.documentElement);
+const { x, y, width, height, top, right, bottom, left } = useSize(elementRef);
 ```
-
