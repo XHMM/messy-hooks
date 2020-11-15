@@ -128,7 +128,7 @@ function Cmp() {
 
 ### useSize
 
-Get element size and position info. (polyfill included).
+Get element size and position info. (polyfill has included).
 
 ```js
 const size = useSize(elementRef);		
@@ -151,4 +151,16 @@ function Cmp() {
     console.log(size); // will logg twice: first is all zero and second has actual value
     return <div ref={ref}> Hi </div>
 }
+```
+
+------
+
+### useLaterEffect
+
+Difference between `useEffect` is this hook not run after first render
+
+```js
+const size = useLaterEffect(() => {
+  
+}, [dep]);		
 ```
