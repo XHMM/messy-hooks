@@ -1,6 +1,6 @@
 {
   "name": "messy-hooks",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "some react hooks",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -9,7 +9,7 @@
     "url": "git+https://github.com/XHMM/react-hooks.git"
   },
   "scripts": {
-    "prepublishOnly": "tsc",
+    "prepublishOnly": "rimraf build && tsc",
     "dev": "parcel ./examples/index.html",
     "build-doc": "parcel build ./examples/index.html -d docs --no-source-maps --public-url /messy-hooks/"
   },
@@ -36,7 +36,6 @@
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
-    "typescript": "^4.0.5",
     "@testing-library/react-hooks": "^3.4.2",
     "@types/jest": "^26.0.15",
     "@types/lodash.throttle": "^4.1.6",
@@ -52,6 +51,8 @@
     "prettier": "^2.1.2",
     "prettier-config-xhmm": "0.0.6",
     "react-test-renderer": "^17.0.1",
-    "ts-jest": "^26.4.4"
+    "rimraf": "3.0.2",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.0.5"
   }
 }

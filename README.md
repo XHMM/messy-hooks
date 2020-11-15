@@ -9,9 +9,9 @@
 
 `npm i messy-hooks`
 
-## APIs
+## Hooks
 
-**Below examples are not in detailed and ready-to-use, checkout [examples folder](https://github.com/XHMM/messy-hooks/tree/master/examples) for practical usages.**
+**Below examples are not in detailed and ready-to-use, checkout [examples](https://github.com/XHMM/messy-hooks/tree/master/examples) folder for practical usage.**
 
 
 
@@ -161,6 +161,6 @@ Difference between `useEffect` is this hook not run after first render
 
 ```js
 const size = useLaterEffect(() => {
-  
+  // your code
 }, [dep]);		
 ```
