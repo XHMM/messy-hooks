@@ -1,6 +1,6 @@
 {
   "name": "messy-hooks",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "some react hooks",
   "main": "./build/index.js",
   "module": "./build/index.esm.js",
@@ -13,7 +13,7 @@
     "lib:build": "rimraf build  && rollup -c",
     "doc:dev": "parcel ./examples/index.html",
     "doc:build": "parcel build ./examples/index.html -d docs --no-source-maps --public-url /messy-hooks/",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run lib:build"
   },
   "files": [
     "build",
